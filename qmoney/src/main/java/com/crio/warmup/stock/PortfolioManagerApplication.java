@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.ThreadContext;
@@ -45,8 +46,11 @@ public class PortfolioManagerApplication {
   //  2. You can use "./gradlew build" to check if your code builds successfully.
 
   public static List<String> mainReadFile(String[] args) throws IOException, URISyntaxException {
-
-     return Collections.emptyList();
+    String file=args[0];
+    String content=readFileAsString(file);
+    ObjectMapper objectMapper=getObjectMapper();
+    PortfolioTrade[] names=objectMapper.readValue(content, PortfolioTrade[].class); 
+     return Stream.of(names).map(PortfolioTrade::getSymbol).collect(Collectors.toList());
   }
 
 
@@ -66,8 +70,6 @@ public class PortfolioManagerApplication {
   // 3. Use RestTemplate#getForObject in order to call the API,
   //    and deserialize the results in List<Candle>
 
-
-
   private static void printJsonObject(Object object) throws IOException {
     Logger logger = Logger.getLogger(PortfolioManagerApplication.class.getCanonicalName());
     ObjectMapper mapper = new ObjectMapper();
@@ -77,6 +79,11 @@ public class PortfolioManagerApplication {
   private static File resolveFileFromResources(String filename) throws URISyntaxException {
     return Paths.get(
         Thread.currentThread().getContextClassLoader().getResource(filename).toURI()).toFile();
+  }
+
+  private static String readFileAsString(String filename)throws URISyntaxException,IOException{
+    return new String(Files.readAllBytes(resolveFileFromResources(filename).toPath()),
+    "UTF-8");
   }
 
   private static ObjectMapper getObjectMapper() {
@@ -117,10 +124,10 @@ public class PortfolioManagerApplication {
   public static List<String> debugOutputs() {
 
      String valueOfArgument0 = "trades.json";
-     String resultOfResolveFilePathArgs0 = "";
-     String toStringOfObjectMapper = "";
-     String functionNameFromTestFileInStackTrace = "";
-     String lineNumberFromTestFileInStackTrace = "";
+     String resultOfResolveFilePathArgs0 = "/home/crio-user/workspace/amalatrasky15-ME_QMONEY_V2/qmoney/bin/main/trades.json";
+     String toStringOfObjectMapper = "com.fasterxml.jackson.databind.ObjectMapper@7c6908d7";
+     String functionNameFromTestFileInStackTrace = "String[1]@23";
+     String lineNumberFromTestFileInStackTrace = "29:1";
 
 
     return Arrays.asList(new String[]{valueOfArgument0, resultOfResolveFilePathArgs0,
