@@ -157,6 +157,12 @@ public class PortfolioManagerApplication {
      }
     return stocks;
   }
+  public static List<PortfolioTrade> readTradesFromJson(String filename) throws IOException, URISyntaxException {
+    ObjectMapper objectMapper=getObjectMapper();
+     List<PortfolioTrade> trades=Arrays.asList(objectMapper.readValue(resolveFileFromResources(filename),PortfolioTrade[].class));
+    return trades;
+
+ }
   public static List<TotalReturnsDto> mainReadQuotesHelper(String[] args,List<PortfolioTrade> trades)throws IOException,URISyntaxException{
     RestTemplate restTemplate=new RestTemplate();
     List<TotalReturnsDto> tests=new ArrayList<TotalReturnsDto>();
@@ -171,17 +177,12 @@ public class PortfolioManagerApplication {
     }
     return tests;
   }
+ 
   // TODO:
   //  After refactor, make sure that the tests pass by using these two commands
   //  ./gradlew test --tests PortfolioManagerApplicationTest.readTradesFromJson
   //  ./gradlew test --tests PortfolioManagerApplicationTest.mainReadFile
-  public static List<PortfolioTrade> readTradesFromJson(String filename) throws IOException, URISyntaxException {
-    String content=readFileAsString(filename);
-    ObjectMapper objectMapper=getObjectMapper();
-    PortfolioTrade[] names=objectMapper.readValue(content, PortfolioTrade[].class); 
-    List<PortfolioTrade> trades=new ArrayList<>();
-     return trades;
-  }
+ 
 
 
   // TODO:
