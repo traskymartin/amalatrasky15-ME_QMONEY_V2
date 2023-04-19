@@ -58,7 +58,9 @@ public class PortfolioManagerApplication {
      return Stream.of(names).map(PortfolioTrade::getSymbol).collect(Collectors.toList());
   }
 
-
+  public static String getToken(){
+    return TOKEN;
+  }
 
 
 
