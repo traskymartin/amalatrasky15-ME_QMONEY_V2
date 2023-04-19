@@ -147,7 +147,7 @@ public class PortfolioManagerApplication {
      String valueOfArgument0 = "trades.json";
      String resultOfResolveFilePathArgs0 = "/home/crio-user/workspace/amalatrasky15-ME_QMONEY_V2/qmoney/bin/main/trades.json";
      String toStringOfObjectMapper = "com.fasterxml.jackson.databind.ObjectMapper@7c6908d7";
-     String functionNameFromTestFileInStackTrace = "String[1]@23";
+     String functionNameFromTestFileInStackTrace = "String[1]@23/mainReadFile";
      String lineNumberFromTestFileInStackTrace = "29:1";
 
 
@@ -227,18 +227,28 @@ private static String buildTiingoUrl(LocalDate endDate, PortfolioTrade trade, St
   // TODO:
   //  Ensure all tests are passing using below command
   //  ./gradlew test --tests ModuleThreeRefactorTest
-  static Double getOpeningPriceOnStartDate(List<Candle> candles) {
-     return 0.0;
+  static Double getOpeningPriceOnStartDate(List<Candle> candles) { 
+    return candles.get(0).getOpen();
   }
-
 
   public static Double getClosingPriceOnEndDate(List<Candle> candles) {
-     return 0.0;
+     return candles.get(candles.size()-1).getClose();
   }
 
 
-  public static List<Candle> fetchCandles(PortfolioTrade trade, LocalDate endDate, String token) {
-     return Collections.emptyList();
+  public static List<Candle> fetchCandles(PortfolioTrade trade, LocalDate endDate, String token) throws JsonMappingException, JsonProcessingException {
+    RestTemplate restTemplate=new RestTemplate();
+    ObjectMapper objectMapper=new ObjectMapper();
+    List<TotalReturnsDto> tests=new ArrayList<TotalReturnsDto>();
+    List<Candle> can=new ArrayList<Candle>();
+    String uri="https://api.tiingo.com/tiingo/daily/"+trade.getSymbol()+"/prices?startDate="+
+      trade.getPurchaseDate().toString()+"&endDate="+endDate
+      +"&token="+token;
+      TiingoCandle[] results=restTemplate.getForObject(uri,TiingoCandle[].class);
+      for(TiingoCandle t:results){
+        can.add(t);
+      }
+      return can;
   }
 
   public static List<AnnualizedReturn> mainCalculateSingleReturn(String[] args)
