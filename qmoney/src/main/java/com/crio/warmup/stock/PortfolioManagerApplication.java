@@ -35,6 +35,8 @@ import org.springframework.web.client.RestTemplate;
 public class PortfolioManagerApplication {
   static String TOKEN="3b5b84139609519f80f0b4bbe8249a89089ccaf8";
   static String URL="https://api.tiingo.com/tiingo/daily/$SYMBOL/prices?startDate=$STARTDATE&endDate=$ENDDATE&token=$APIKEY";
+  public static RestTemplate restTemplate=new RestTemplate();
+  public static PortfolioManager portfolioManager=PortfolioManagerFactory.getPortfolioManager(restTemplate);
   // TODO: CRIO_TASK_MODULE_JSON_PARSING
   //  Task:
   //       - Read the json file provided in the argument[0], The file is available in the classpath.
