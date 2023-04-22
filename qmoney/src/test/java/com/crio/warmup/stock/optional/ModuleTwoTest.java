@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class ModuleTwoTest {
-
-  @Test 
+ 
+  @Test
   void readStockFromJson() throws Exception {
     //given
     String filename = "assessments/trades.json";

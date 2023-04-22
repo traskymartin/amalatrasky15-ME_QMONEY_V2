@@ -50,7 +50,7 @@ class PortfolioManagerApplicationTest {
 
 
   @Test
-  void mainCalculateAnnualReturn1() throws Exception {
+  void mainCalculateAnnualReturn() throws Exception {
     //given
     String filename = "trades.json";
     //when
