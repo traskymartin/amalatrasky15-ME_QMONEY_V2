@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 class ModuleTwoTest {
  
+
   @Test
   void readStockFromJson() throws Exception {
     //given

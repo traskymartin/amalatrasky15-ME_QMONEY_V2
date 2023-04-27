@@ -28,7 +28,6 @@ public class TotalReturnsDto implements Comparator {
   public void setClosingPrice(Double closingPrice) {
     this.closingPrice = closingPrice;
   }
-
   @Override
   public int compare(Object arg0, Object arg1) {
     // TODO Auto-generated method stub

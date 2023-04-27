@@ -332,6 +332,19 @@ private static String buildTiingoUrl(LocalDate endDate, PortfolioTrade trade, St
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   public static void main(String[] args) throws Exception {
     Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
     ThreadContext.put("runId", UUID.randomUUID().toString());
@@ -349,6 +362,9 @@ private static String buildTiingoUrl(LocalDate endDate, PortfolioTrade trade, St
 
 
     printJsonObject(mainCalculateReturnsAfterRefactor(args));
+
+
+
   }
 }
 

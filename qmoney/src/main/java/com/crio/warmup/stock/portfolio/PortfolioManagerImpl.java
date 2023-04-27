@@ -55,6 +55,8 @@ public class PortfolioManagerImpl implements PortfolioManager {
 
 
 
+
+
   
 
   //CHECKSTYLE:OFF
@@ -122,4 +124,11 @@ public class PortfolioManagerImpl implements PortfolioManager {
     }
     return annualizedReturn;
   }
+  private Comparator<AnnualizedReturn> getComparator() {
+    return Comparator.comparing(AnnualizedReturn::getAnnualizedReturn).reversed();
+  }
+
+
+
+
 }
