@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+import java.util.*;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -62,7 +63,7 @@ private static ObjectMapper getObjectMapper() {
   return objectMapper;
 }
 
-protected String buildUri(String symbol, LocalDate startDate, LocalDate endDate) {
+protected String buildUri(String symbol) {
 String token="KDHMQ4C28QFQXOA1";
    String uriTemplate ="https://www.alphavantage.co/query?function=$FUNCTION&symbol=$SYMBOL&output=full&apikey=$APIKEY";
         String uri=uriTemplate.replace("$APIKEY", token).replace("$SYMBOL", symbol).replace("$FUNCTION",FUNCTIiON);
