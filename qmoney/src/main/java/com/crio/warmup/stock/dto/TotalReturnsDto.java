@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 public class TotalReturnsDto implements Comparator {
 
+
   private String symbol;
   private Double closingPrice;
 

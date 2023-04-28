@@ -33,7 +33,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 public class PortfolioManagerApplication {
-  static String TOKEN="3b5b84139609519f80f0b4bbe8249a89089ccaf8";
+  static String TOKEN="KDHMQ4C28QFQXOA1";
   static String URL="https://api.tiingo.com/tiingo/daily/$SYMBOL/prices?startDate=$STARTDATE&endDate=$ENDDATE&token=$APIKEY";
   public static RestTemplate restTemplate=new RestTemplate();
   public static PortfolioManager portfolioManager=PortfolioManagerFactory.getPortfolioManager(restTemplate);
@@ -330,6 +330,13 @@ private static String buildTiingoUrl(LocalDate endDate, PortfolioTrade trade, St
        PortfolioTrade[] portfolioTrades=objectMapper.readValue(contents,PortfolioTrade[].class);
        return portfolioManager.calculateAnnualizedReturn(Arrays.asList(portfolioTrades), endDate);
   }
+
+
+
+
+
+
+
 
 
 
