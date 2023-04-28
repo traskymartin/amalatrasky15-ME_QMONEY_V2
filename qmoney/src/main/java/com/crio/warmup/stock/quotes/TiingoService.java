@@ -14,11 +14,10 @@ import java.util.*;
 import org.springframework.web.client.RestTemplate;
 
 public class TiingoService implements StockQuotesService {
-private RestTemplate restTemplate;
 public static final String Token="3b5b84139609519f80f0b4bbe8249a89089ccaf8";
-  private RestTemplate resttemplate;
+  private RestTemplate restTemplate;
   protected TiingoService(RestTemplate restTemplate){
-  this.restTemplate=resttemplate;
+  this.restTemplate=restTemplate;
   }
 
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
@@ -60,7 +59,7 @@ private static ObjectMapper getObjectMapper() {
 }
 
 protected String buildUri(String symbo,LocalDate from,LocalDate to) {
-   String uriTemplate ="https://api.tiingo.com/tiingo/daily/$SYMBOL/prices?startDate=$FROM&endDate=$END&token=$APIKEY";
+   String uriTemplate =String.format("https://api.tiingo.com/tiingo/daily/%s/prices?"+"startDate=%s&endDate=%s&token=%s",symbo,from,to,Token);
         String uri=uriTemplate.replace("$APIKEY", Token).replace("$SYMBOL",symbo).replace("$FROM",from.toString())
         .replace("$END",to.toString());
   return uri;
