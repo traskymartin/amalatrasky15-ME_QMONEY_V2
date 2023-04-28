@@ -18,11 +18,6 @@ public class PortfolioManagerFactory {
 
 
 
-
-  public static PortfolioManager getPortfolioManager(RestTemplate restTemplate) {
-
-  }
-
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement the method to return new instance of PortfolioManager.
   //  Steps:

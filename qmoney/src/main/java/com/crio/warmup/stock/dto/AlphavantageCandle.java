@@ -10,8 +10,8 @@ import java.util.Map;
 
  // Reference - https:www.baeldung.com/jackson-ignore-properties-on-serialization
 //  Reference - https:www.baeldung.com/jackson-name-of-property
-@JsonIgnoreProperties(ignoreUnKnown=true)
-public class AlphavantageCandle implements Candle {
+@JsonIgnoreProperties(ignoreUnknown=true)
+public abstract class AlphavantageCandle implements Candle {
   @JsonProperty("1. open")
   private Double open;
   @JsonProperty("2. high")
