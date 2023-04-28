@@ -28,7 +28,7 @@ private StockQuoteServiceFactory(){
     if(provider==null){
      return new AlphavantageService(restTemplate) ;
     }else if(provider.equalsIgnoreCase("tiingo")){
-      return TiingoService(restTemplate);
+      return new TiingoService(restTemplate);
     }else{
       return new AlphavantageService(restTemplate);
     }

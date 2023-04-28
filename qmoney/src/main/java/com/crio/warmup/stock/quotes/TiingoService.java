@@ -20,7 +20,9 @@ private RestTemplate restTemplate;
 public static final String Token="KDHMQ4C28QFQXOA1";
   public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private RestTemplate resttemplate;
-
+protected TiingoService(RestTemplate restTemplate){
+  this.restTemplate=resttemplate;
+}
 
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement getStockQuote method below that was also declared in the interface.
