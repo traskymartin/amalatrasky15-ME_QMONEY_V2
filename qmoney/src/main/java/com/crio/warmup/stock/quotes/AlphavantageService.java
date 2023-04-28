@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.client.RestTemplate;
 
-public abstract class AlphavantageService implements StockQuotesService {
+public  class AlphavantageService implements StockQuotesService {
 
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement the StockQuoteService interface as per the contracts. Call Alphavantage service
