@@ -23,10 +23,6 @@ public   class AlphavantageService implements StockQuotesService {
   public static final String Token="KDHMQ4C28QFQXOA1";
   public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private StockQuotesService stockQuotesService;
-  public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to)
-  throws JsonProcessingException {
-  return stockQuotesService.getStockQuote(symbol,from,to);
-  }
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement the StockQuoteService interface as per the contracts. Call Alphavantage service
   //  to fetch daily adjusted data for last 20 years.
