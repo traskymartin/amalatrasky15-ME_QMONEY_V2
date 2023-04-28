@@ -3,7 +3,7 @@ package com.crio.warmup.stock.quotes;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.time.temporal.ChronoUnit.SECONDS;
-
+import com.crio.warmup.stock.quotes.StockQuotesService;
 import com.crio.warmup.stock.dto.AlphavantageDailyResponse;
 import com.crio.warmup.stock.dto.Candle;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,10 +13,15 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.client.RestTemplate;
 
-public  class AlphavantageService implements StockQuotesService {
-
+public   class AlphavantageService implements StockQuotesService {
+  private StockQuotesService stockQuotesService;
+  public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to)
+  throws JsonProcessingException {
+  return stockQuotesService.getStockQuote(symbol,from,to);
+}
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement the StockQuoteService interface as per the contracts. Call Alphavantage service
   //  to fetch daily adjusted data for last 20 years.
