@@ -60,7 +60,7 @@ private static ObjectMapper getObjectMapper() {
 }
 
 protected String buildUri(String symbo,LocalDate from,LocalDate to) {
-   String uriTemplate ="https://api.tiingo.com/tiingo/daily/$SYMBOL/prices?startDate=&FROM&endDate=$END&token=$APIKEY";
+   String uriTemplate ="https://api.tiingo.com/tiingo/daily/$SYMBOL/prices?startDate=$FROM&endDate=$END&token=$APIKEY";
         String uri=uriTemplate.replace("$APIKEY", Token).replace("$SYMBOL",symbo).replace("$FROM",from.toString())
         .replace("$END",to.toString());
   return uri;

@@ -4,24 +4,29 @@ package com.crio.warmup.stock.quotes;
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.time.temporal.ChronoUnit.SECONDS;
 import com.crio.warmup.stock.quotes.StockQuotesService;
+import com.crio.warmup.stock.dto.AlphavantageCandle;
 import com.crio.warmup.stock.dto.AlphavantageDailyResponse;
 import com.crio.warmup.stock.dto.Candle;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.client.RestTemplate;
 
 public   class AlphavantageService implements StockQuotesService {
+  public static final String Token="KDHMQ4C28QFQXOA1";
+  public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private StockQuotesService stockQuotesService;
   public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to)
   throws JsonProcessingException {
   return stockQuotesService.getStockQuote(symbol,from,to);
-}
+  }
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement the StockQuoteService interface as per the contracts. Call Alphavantage service
   //  to fetch daily adjusted data for last 20 years.
@@ -50,12 +55,36 @@ public   class AlphavantageService implements StockQuotesService {
   //     be using configurations provided in the {@link @application.properties}.
   //  2. Use this method in #getStockQuote.
   
-  public static final String Token="KDHMQ4C28QFQXOA1";
-  public static final String FUNCTIiON="TIME_SERIES_DAILY";
-  private RestTemplate resttemplate;
-  protected AlphavantageService(RestTemplate resttemplate){
-    this.resttemplate=resttemplate;
-  }
 
+  private RestTemplate restTemplate;
+  protected AlphavantageService(RestTemplate resttemplate){
+    this.restTemplate=resttemplate;
+  }
+  protected String buildUri(String symbo) {
+    String uriTemplate =String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&output=full&apikey=%s",FUNCTIiON,symbo,Token);
+   return uriTemplate;
+ }
+ @Override
+ public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to) throws JsonProcessingException {
+   List<Candle> stackStarttoend;
+   String url=buildUri(symbol);
+   String apiResponce=restTemplate.getForObject(url,String.class);
+   ObjectMapper objectMapper=getObjectMapper();
+   Map<LocalDate,AlphavantageCandle> dailyResponce=objectMapper.readValue(apiResponce,AlphavantageDailyResponse.class).getCandles();
+   List<Candle> stocks=new ArrayList<>();
+   for(LocalDate date=from;!date.isAfter(to);date=date.plusDays(1)){
+    AlphavantageCandle candle=dailyResponce.get(date);
+    if(candle!=null){
+      candle.setDate(date);
+      stocks.add(candle);
+    }
+   }
+   return stocks;
+}
+private static ObjectMapper getObjectMapper() {
+  ObjectMapper objectMapper = new ObjectMapper();
+  objectMapper.registerModule(new JavaTimeModule());
+  return objectMapper;
+}
 }
 
