@@ -20,7 +20,23 @@ public abstract class AlphavantageCandle implements Candle {
   private Double low;
   @JsonProperty("4. close")
   private Double close;
+
   private LocalDate date;
+
+  @Override
+  public Double getLow(){
+    return low;
+  }
+  public void setLow(Double low){
+    this.low=low;
+  }
+  @Override
+  public Double getHigh(){
+    return high;
+  }
+  public void setHigh(Double high){
+    this.high=high;
+  }
 
   @Override
   public Double getOpen(){
@@ -43,8 +59,11 @@ public abstract class AlphavantageCandle implements Candle {
   public LocalDate getDate(){
     return date;
   }
-  public void setDate(LocalDate date){
-    this.date=date;
-  }
+ // public void setDate(LocalDate date){
+   // this.date=date;
+ // }
+public void setDate(LocalDate date2) {
+  this.date=date2;
+}
 }
 

@@ -97,14 +97,14 @@ class AlphavantageServiceTest {
   }
 
 
-  private AlphavantageDailyResponse getParsedResponse(String quotes) {
+  private AlphavantageDailyResponse getParsedResponse(String quotes) throws Exception{
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.registerModule(new JavaTimeModule());
-    try {
+    //try {
       return objectMapper.readValue(quotes, AlphavantageDailyResponse.class);
-    } catch (Exception ex) {
-      throw new RuntimeException(ex);
-    }
+    //} catch (Exception ex) {
+    //  throw new RuntimeException(ex);
+    //}
   }
 
 
