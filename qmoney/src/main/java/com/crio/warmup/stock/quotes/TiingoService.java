@@ -20,12 +20,6 @@ private RestTemplate restTemplate;
 public static final String Token="KDHMQ4C28QFQXOA1";
   public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private RestTemplate resttemplate;
-  protected AlphavantageService(RestTemplate resttemplate){
-    this.resttemplate=resttemplate;
-  }
-  protected TiingoService(RestTemplate restTemplate) {
-    this.restTemplate = restTemplate;
-  }
 
 
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
