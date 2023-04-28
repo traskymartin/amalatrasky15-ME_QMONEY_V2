@@ -26,7 +26,7 @@ public abstract class AlphavantageCandle implements Candle {
   public Double getOpen(){
     return open;
   }
-  @Override
+
   public void setOpen(Double open){
     this.open=open;
   }
@@ -34,7 +34,7 @@ public abstract class AlphavantageCandle implements Candle {
   public Double getClose(){
     return close;
   }
-  @Override
+  
   public void setClose(Double close){
     this.close=close;
   }
