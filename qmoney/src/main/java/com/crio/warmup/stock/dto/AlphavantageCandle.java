@@ -1,3 +1,4 @@
+package com.crio.warmup.stock.dto;
 import java.util.Set;
 
 // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR

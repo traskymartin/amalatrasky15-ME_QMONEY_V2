@@ -130,7 +130,7 @@ public class PortfolioManagerImpl implements PortfolioManager {
 
 
 
-  // ¶TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
+  // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Modify the function #getStockQuote and start delegating to calls to
   //  stockQuoteService provided via newly added constructor of the class.
   //  You also have a liberty to completely get rid of that function itself, however, make sure
