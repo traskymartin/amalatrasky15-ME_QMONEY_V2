@@ -38,5 +38,13 @@ public abstract class AlphavantageCandle implements Candle {
   public void setClose(Double close){
     this.close=close;
   }
+
+  @Override 
+  public LocalDate getDate(){
+    return date;
+  }
+  public void setDate(LocalDate date){
+    this.date=date;
+  }
 }
 
