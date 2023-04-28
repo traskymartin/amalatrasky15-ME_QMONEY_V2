@@ -22,8 +22,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.client.RestTemplate;
 
 public   class AlphavantageService implements StockQuotesService {
-  public static final String Token="KDHMQ4C28QFQXOA1";
-  public static final String FUNCTIiON="TIME_SERIES_DAILY";
+  public static final String Token="RYTU2N6EVTYBYCLS";
+  public static final String FUNCTIiON="TIME_SERIES_DAILY_ADJUSTED";
   
   private RestTemplate restTemplate;
   protected AlphavantageService(RestTemplate resttemplate){

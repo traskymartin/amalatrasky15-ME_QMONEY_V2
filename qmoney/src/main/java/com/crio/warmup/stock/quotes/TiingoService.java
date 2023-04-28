@@ -14,7 +14,7 @@ import java.util.*;
 import org.springframework.web.client.RestTemplate;
 
 public class TiingoService implements StockQuotesService {
-public static final String Token="3b5b84139609519f80f0b4bbe8249a89089ccaf8";
+public static final String Token="a92bb455a97449ca9eb46a9af9868b54aa8bed9c";
   private RestTemplate restTemplate;
   protected TiingoService(RestTemplate restTemplate){
   this.restTemplate=restTemplate;
