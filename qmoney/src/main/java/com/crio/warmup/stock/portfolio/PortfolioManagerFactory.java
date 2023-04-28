@@ -30,7 +30,7 @@ public class PortfolioManagerFactory {
 
    public static PortfolioManager getPortfolioManager(String provider,
      RestTemplate restTemplate) {
-      StockQuatesService stockQuoteService=StockQuoteServiceFactory.INSTANCE.getService(provider, restTemplate);
+     StockQuotesService stockQuoteService=StockQuoteServiceFactory.INSTANCE.getService(provider, restTemplate);
      return new PortfolioManagerImp(stockQuoteService);
    }
 
