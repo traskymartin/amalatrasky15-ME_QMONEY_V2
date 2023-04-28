@@ -16,10 +16,13 @@ import java.util.*;
 import org.springframework.web.client.RestTemplate;
 
 public class TiingoService implements StockQuotesService {
-public static final String Token="KDHMQ4C28QFQXOA1";
-public static final String FUNCTIiON="TIME_SERIES_DAILY";
 private RestTemplate restTemplate;
-
+public static final String Token="KDHMQ4C28QFQXOA1";
+  public static final String FUNCTIiON="TIME_SERIES_DAILY";
+  private RestTemplate resttemplate;
+  protected AlphavantageService(RestTemplate resttemplate){
+    this.resttemplate=resttemplate;
+  }
   protected TiingoService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
@@ -46,7 +49,7 @@ private RestTemplate restTemplate;
     String url=buildUri(symbol);
     String apiResponse=restTemplate.getForObject(url,String.class);
     ObjectMapper mapper=getObjectMapper();
-    Map<LocalDate,AlphavantageCandle> dailyReasponse=mapper.readValue(apiResponse,AlphavantageDailyResponse.class);
+    Map<LocalDate,AlphavantageCandle> dailyReasponse=mapper.readValue(apiResponse,AlphavantageDailyResponse.class).getCandles();
     List<Candle> stocks=new ArrayList<>();
     for(LocalDate date=from;!date.isAfter(to);date=date.plusDays(1)){
       AlphavantageCandle candle=dailyReasponse.get(date);

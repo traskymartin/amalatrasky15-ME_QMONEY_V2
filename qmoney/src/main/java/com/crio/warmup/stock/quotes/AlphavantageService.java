@@ -44,6 +44,7 @@ public  class AlphavantageService implements StockQuotesService {
   //  1. Write a method to create appropriate url to call Alphavantage service. The method should
   //     be using configurations provided in the {@link @application.properties}.
   //  2. Use this method in #getStockQuote.
+  
   public static final String Token="KDHMQ4C28QFQXOA1";
   public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private RestTemplate resttemplate;
