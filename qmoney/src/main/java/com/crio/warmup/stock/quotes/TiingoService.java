@@ -1,9 +1,7 @@
 
 package com.crio.warmup.stock.quotes;
 
-import com.crio.warmup.stock.dto.Candle;
 import com.crio.warmup.stock.dto.*;
-import com.crio.warmup.stock.dto.AlphavantageDailyResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -18,11 +16,10 @@ import org.springframework.web.client.RestTemplate;
 public class TiingoService implements StockQuotesService {
 private RestTemplate restTemplate;
 public static final String Token="3b5b84139609519f80f0b4bbe8249a89089ccaf8";
-  public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private RestTemplate resttemplate;
-protected TiingoService(RestTemplate restTemplate){
+  protected TiingoService(RestTemplate restTemplate){
   this.restTemplate=resttemplate;
-}
+  }
 
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Implement getStockQuote method below that was also declared in the interface.
@@ -37,16 +34,23 @@ protected TiingoService(RestTemplate restTemplate){
 
   // TODO: CRIO_TASK_MODULE_ADDITIONAL_REFACTOR
   //  Write a method to create appropriate url to call the Tiingo API.
+  @Override
   public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to)
   throws JsonProcessingException {
+    List<Candle> stackStarttoend;
     if(from.compareTo(to)>=0){
       throw new RuntimeException();
     }
     String url=buildUri(symbol,from,to);
-    String apiResponse=restTemplate.getForObject(url,String.class);
-    TiingoCandle[] stocksStrattoEnd=restTemplate.getForObject(url,TiingoCandle[].class);
-    List<Candle> stocklist=Arrays.asList(stocksStrattoEnd);
-    return stocklist;
+    String stcoks=restTemplate.getForObject(url,String.class);
+    ObjectMapper objectMapper=getObjectMapper();
+    TiingoCandle[] stocksStrattoEndArray=objectMapper.readValue(stcoks,TiingoCandle[].class);
+    if(stocksStrattoEndArray!=null){
+      stackStarttoend=Arrays.asList(stocksStrattoEndArray);
+    }else{
+      stackStarttoend=Arrays.asList(new TiingoCandle[0]);
+        }
+    return stackStarttoend;
 }
 
 private static ObjectMapper getObjectMapper() {
