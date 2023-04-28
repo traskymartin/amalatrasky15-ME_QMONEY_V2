@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.client.RestTemplate;
 
 public   class AlphavantageService implements StockQuotesService {
-  public static final String Token="demo";
+  public static final String Token="KDHMQ4C28QFQXOA1";
   public static final String FUNCTIiON="TIME_SERIES_DAILY";
   
   private RestTemplate restTemplate;
@@ -30,9 +30,10 @@ public   class AlphavantageService implements StockQuotesService {
     this.restTemplate=resttemplate;
   }
  protected String buildUri(String symbo) {
-    String uriTemplate =String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&output=full&apikey=%s",FUNCTIiON,symbo,Token);
+    String uriTemplate =String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&apikey=%s",FUNCTIiON,symbo,Token);
    return uriTemplate;
  }
+ 
  @Override
  public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to) throws JsonProcessingException {
    String url=buildUri(symbol);
