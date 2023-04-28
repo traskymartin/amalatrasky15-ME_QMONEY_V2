@@ -26,7 +26,7 @@ private StockQuoteServiceFactory(){
 
   public StockQuotesService getService(String provider,  RestTemplate restTemplate) {
     if(provider==null){
-     return new RestTemplate(restTemplate) ;
+     return new AlphavantageService(restTemplate) ;
     }else if(provider.equalsIgnoreCase("tiingo")){
       return new TiingoService(restTemplate);
     }else{
