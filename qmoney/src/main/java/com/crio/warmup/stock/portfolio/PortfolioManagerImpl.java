@@ -70,10 +70,6 @@ public class PortfolioManagerImpl implements PortfolioManager {
   // TODO: CRIO_TASK_MODULE_REFACTOR
   //  Extract the logic to call Tiingo third-party APIs to a separate function.
   //  Remember to fill out the buildUri function and use that.
-private StockQuotesService stockQuoteService;
-PortfolioManagerImpl(StockQuotesService stockQuoteService){
-  this.stockQuoteService=stockQuoteService;
-}
 
   public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to)
       throws JsonProcessingException {
