@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class TiingoService implements StockQuotesService {
 private RestTemplate restTemplate;
-public static final String Token="KDHMQ4C28QFQXOA1";
+public static final String Token="3b5b84139609519f80f0b4bbe8249a89089ccaf8";
   public static final String FUNCTIiON="TIME_SERIES_DAILY";
   private RestTemplate resttemplate;
 protected TiingoService(RestTemplate restTemplate){
@@ -42,19 +42,11 @@ protected TiingoService(RestTemplate restTemplate){
     if(from.compareTo(to)>=0){
       throw new RuntimeException();
     }
-    String url=buildUri(symbol);
+    String url=buildUri(symbol,from,to);
     String apiResponse=restTemplate.getForObject(url,String.class);
-    ObjectMapper mapper=getObjectMapper();
-    Map<LocalDate,AlphavantageCandle> dailyReasponse=mapper.readValue(apiResponse,AlphavantageDailyResponse.class).getCandles();
-    List<Candle> stocks=new ArrayList<>();
-    for(LocalDate date=from;!date.isAfter(to);date=date.plusDays(1)){
-      AlphavantageCandle candle=dailyReasponse.get(date);
-      if(candle!=null){
-        candle.setDate(date);
-        stocks.add(candle);
-      }
-    }
-    return stocks;
+    TiingoCandle[] stocksStrattoEnd=restTemplate.getForObject(url,TiingoCandle[].class);
+    List<Candle> stocklist=Arrays.asList(stocksStrattoEnd);
+    return stocklist;
 }
 
 private static ObjectMapper getObjectMapper() {
@@ -63,10 +55,11 @@ private static ObjectMapper getObjectMapper() {
   return objectMapper;
 }
 
-protected String buildUri(String symbol) {
+protected String buildUri(String symbo,LocalDate from,LocalDate to) {
 String token="KDHMQ4C28QFQXOA1";
-   String uriTemplate ="https://www.alphavantage.co/query?function=$FUNCTION&symbol=$SYMBOL&output=full&apikey=$APIKEY";
-        String uri=uriTemplate.replace("$APIKEY", token).replace("$SYMBOL", symbol).replace("$FUNCTION",FUNCTIiON);
+   String uriTemplate ="https://api.tiingo.com/tiingo/daily/$SYMBOL/prices?startDate=&FROM&endDate=$END&token=$APIKEY";
+        String uri=uriTemplate.replace("$APIKEY", token).replace("$SYMBOL",symbo).replace("$FROM",from.toString())
+        .replace("$END",to.toString());
   return uri;
 }
 
